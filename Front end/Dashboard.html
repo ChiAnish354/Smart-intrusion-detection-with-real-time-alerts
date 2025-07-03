@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1e293b;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav ul li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sidebar nav ul li.active,
+.sidebar nav ul li:hover {
+  background-color: #334155;
+}
+
+.sidebar .status {
+  color: #00ff6a;
+  font-size: 14px;
+}
+
+/* Main Dashboard */
+.dashboard {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.test-alert {
+  background-color: #2563eb;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card.green {
+  background-color: #059669;
+}
+
+.card.red {
+  background-color: #dc2626;
+}
+
+.card.yellow {
+  background-color: #f59e0b;
+}
+
+.activity {
+  background-color: #1e293b;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.system-armed {
+  background-color: #1e293b;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.armed-box {
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #059669;
+  border-radius: 10px;
+}
+
+.disarm {
+  margin-top: 10px;
+  background-color: #dc2626;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.bottom-panels {
+  display: flex;
+  gap: 20px;
+}
+
+.alerts,
+.zones {
+  flex: 1;
+  background-color: #1e293b;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.alerts h2,
+.zones h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-item {
+  background-color: #0f172a;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.badge {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.badge.yellow {
+  background-color: #fbbf24;
+  color: #000;
+}
+
+.badge.red {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.alert-item button {
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.alert-item .ack {
+  background-color: #f59e0b;
+}
+
+.alert-item .resolve {
+  background-color: #2563eb;
+  color: white;
+}
+
+.zone {
+  margin: 10px 0;
+  background-color: #0f172a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.status.secured {
+  color: #34d399;
+  font-weight: bold;
+}
+
+.status.inactive {
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+.view-all,
+.manage {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #334155;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>🔒 Intrusion Detection</h2>
+      <nav>
+        <ul>
+          <li class="active">Dashboard</li>
+          <li> <a href="Alert.html "style="text-decoration: none; color: inherit;">Alerts (2)</a></li>
+          <li>History</li>
+          <li>Zones</li>
+          <li>Settings</li>
+        </ul>
+      </nav>
+      <div class="status">● System Online</div>
+    </aside>
+
+    <main class="dashboard">
+      <header>
+        <div>
+          <h1>Security Dashboard</h1>
+          <p>Monitor and manage your security system</p>
+        </div>
+        <button class="test-alert">Trigger Test Alert</button>
+      </header>
+
+      <section class="cards">
+        <div class="card green">
+          <h3>System Armed</h3>
+          <p>Your security system is active and monitoring.</p>
+        </div>
+        <div class="card red">
+          <h3>1 Active Alerts</h3>
+          <p>You have unresolved security alerts that need attention</p>
+        </div>
+        <div class="card yellow">
+          <h3>1 Pending Alerts</h3>
+          <p>You have acknowledged alerts waiting to be resolved</p>
+        </div>
+      </section>
+
+      <section class="activity">
+        <div>
+        <h2>System Activity</h2>
+        <canvas id="activityChart" width="700" height="200"></canvas>
+        </div>
+        <hr>
+   
+      </section>
+      <section class="system-armed">
+             <div class="armed-box">
+          <h3>✅ System Armed</h3>
+          <p>Your security system is active and monitoring all zones.</p>
+          <button class="disarm">Disarm System</button>
+        </div>
+      </section>
+
+      <section class="bottom-panels">
+        <div class="alerts">
+          <h2>Recent Alerts <button class="view-all">View All</button></h2>
+          <div class="alert-item acknowledged">
+            <strong>⚠️ Motion Detected</strong>
+            <p>Motion detected in Front Door zone</p>
+            <span class="badge yellow">acknowledged</span>
+            <button class="resolve">Resolve</button>
+          </div>
+          <div class="alert-item new">
+            <strong>🚨 Window Sensor Triggered</strong>
+            <p>Window sensor triggered in Living Room</p>
+            <span class="badge red">new</span>
+            <button class="ack">Acknowledge</button>
+            <button class="resolve">Resolve</button>
+          </div>
+        </div>
+
+        <div class="zones">
+          <h2>Security Zones <button class="manage">Manage Zones</button></h2>
+          <div class="zone">
+            <strong>Front Door</strong>
+            <p>2 devices<br/>Last event: Motion detected at 2:30am</p>
+            <span class="status secured">Secured</span>
+          </div>
+          <div class="zone">
+            <strong>Back Yard</strong>
+            <p>3 devices</p>
+            <span class="status secured">Secured</span>
+          </div>
+          <div class="zone">
+            <strong>Garage</strong>
+            <p>1 device</p>
+            <span class="status inactive">Inactive</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>     
+
+  <script>
+
+    // Add chart to the canvas using Chart.js
+// You must include Chart.js from CDN in the HTML for this to work
+
+const ctx = document.getElementById('activityChart').getContext('2d');
+const activityChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Jun 17', 'Jun 18', 'Jun 19', 'Jun 20', 'Jun 21', 'Jun 22', 'Jun 23'],
+    datasets: [
+      {
+        label: 'Events',
+        data: [2, 3, 4, 6, 7, 5, 3],
+        borderColor: '#3b82f6',
+        backgroundColor: 'transparent',
+        tension: 0.4,
+      },
+      {
+        label: 'Alerts',
+        data: [0, 1, 2, 3, 4, 3, 1],
+        borderColor: '#ef4444',
+        backgroundColor: 'transparent',
+        tension: 0.4,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#334155' },
+        ticks: { color: '#94a3b8' },
+      },
+      x: {
+        grid: { color: '#334155' },
+        ticks: { color: '#94a3b8' },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#f8fafc'
+        }
+      }
+    }
+  },
+});
+
+// Example interactions
+const disarmBtn = document.querySelector('.disarm');
+disarmBtn.addEventListener('click', () => {
+  alert('System Disarmed!');
+});
+
+const testAlertBtn = document.querySelector('.test-alert');
+testAlertBtn.addEventListener('click', () => {
+  alert('Test Alert Triggered!');
+});
+
+  </script>
+
+</body>
+
+</html>
